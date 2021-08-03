@@ -1,18 +1,9 @@
 CREATE TABLE Employee (
     ID varchar(50) PRIMARY KEY,
-    Manager varchar(50),
-    Job_ID INT,
     Education_level_ID INT,
     Name varchar(50),
-    Email varchar(50)
-);
-
-CREATE TABLE Employee_History (
-    Employee_ID varchar(50),
-    Hire_Date date,
-    Start_Date date,
-    End_Date date,
-    PRIMARY KEY (Employee_ID, Hire_Date)
+    Email varchar(50),
+    Hire_Date date
 );
 
 CREATE TABLE Education_Level (
@@ -21,18 +12,19 @@ CREATE TABLE Education_Level (
 );
 
 CREATE TABLE Salary (
-    Employee_ID varcahr(50),
-    Effective_Date date,
-    Salary money,
-    End_date date,
-    PRIMARY KEY (Employee_ID, Effective_Date)
+    JobHistory_ID INT,
+    Salary money
 );
 
-CREATE TABLE Job (
+CREATE TABLE Job_History (
     ID SERIAL PRIMARY KEY,
+    Employee_ID varchar(50),
     Department_ID INT,
     Location_ID INT,
-    Title varchar(50)
+    Title_ID INT,
+    Start_Date date,
+    End_Date date,
+    Manager_ID varchar(50)
 );
 
 CREATE TABLE Department (
@@ -48,18 +40,18 @@ CREATE TABLE Location (
     State varchar(50)
 );
 
+CREATE TABLE Title (
+    ID SERIAL PRIMARY KEY,
+    title varchar(50)
+);
 
-ALTER TABLE Employee
-    ADD CONSTRAINT fk_employee_manager FOREIGN KEY (Manager) REFERENCES Employee (Name),
-    ADD CONSTRAINT fk_employee_job FOREIGN KEY (Job_ID) REFERENCES Job (ID),
-    ADD CONSTRAINT fk_employee_edu FOREIGN KEY (Education_level_ID) REFERENCES Education_Level (ID);
-        
-ALTER TABLE Employee_History
-    ADD CONSTRAINT fk_employeehistory_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
+ALTER TABLE Employee ADD CONSTRAINT fk_employee_edu FOREIGN KEY (Education_level_ID) REFERENCES Education_Level (ID);
     
-ALTER TABLE Salary
-    ADD CONSTRAINT fk_salary_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
+ALTER TABLE Salary ADD CONSTRAINT fk_salary_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
     
-ALTER TABLE Job
-    ADD CONSTRAINT fk_job_department FOREIGN KEY (Department_ID) REFERENCES Department (ID),
-    ADD CONSTRAINT fk_job_location FOREIGN KEY (Location_ID) REFERENCES Location (ID);
+ALTER TABLE Job_History ADD CONSTRAINT fk_job_department FOREIGN KEY (Department_ID) REFERENCES Department (ID);
+ALTER TABLE Job_History ADD CONSTRAINT fk_job_location FOREIGN KEY (Location_ID) REFERENCES Location (ID);
+ALTER TABLE Job_History ADD CONSTRAINT fk_jobhistory_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
+ALTER TABLE Job_History ADD CONSTRAINT fk_jobhistory_title FOREIGN KEY (title_id) REFERENCES Title (ID);
+
+ALTER TABLE Salary ADD CONSTRAINT FK_jobhistory_salary FOREIGN KEY (JobHistory_ID) REFERENCES Job_History (ID);
