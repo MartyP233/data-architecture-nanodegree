@@ -46,9 +46,7 @@ CREATE TABLE Title (
 );
 
 ALTER TABLE Employee ADD CONSTRAINT fk_employee_edu FOREIGN KEY (Education_level_ID) REFERENCES Education_Level (ID);
-    
-ALTER TABLE Salary ADD CONSTRAINT fk_salary_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
-    
+        
 ALTER TABLE Job_History ADD CONSTRAINT fk_job_department FOREIGN KEY (Department_ID) REFERENCES Department (ID);
 ALTER TABLE Job_History ADD CONSTRAINT fk_job_location FOREIGN KEY (Location_ID) REFERENCES Location (ID);
 ALTER TABLE Job_History ADD CONSTRAINT fk_jobhistory_employee FOREIGN KEY (Employee_ID) REFERENCES Employee (ID);
