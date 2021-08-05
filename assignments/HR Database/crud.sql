@@ -16,15 +16,22 @@ ORDER BY e.name;
 insert into title (title)
 VALUES ('Web Programmer');
 
+SELECT * FROM title;
+
 -- Question 3: Correct the job title from web programmer to web developer
 
 UPDATE title
 set title = 'Web Developer'
 where title = 'Web Programmer';
+
+SELECT * FROM title;
+
 -- Question 4: Delete the job title Web Developer from the database
 
 DELETE FROM title
 where title = 'Web Developer';
+
+SELECT * FROM title;
 
 -- Question 5: How many employees are in each department?
 
@@ -33,6 +40,7 @@ FROM Job_History j
 LEFT JOIN department d
     ON j.department_id = d.id
 GROUP BY d.name;
+
 -- Question 6: Write a query that returns current and past jobs (include employee name, job title, department, manager name, start and end date for position) for employee Toni Lembeck.
 
 SELECT e.name, t.title, d.name AS Department, ee.name AS Manager_Name, start_date, end_date

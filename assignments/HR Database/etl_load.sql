@@ -1,4 +1,4 @@
-# ETL
+-- ETL
 
 INSERT INTO Education_Level (Edu_Level_Name)
 SELECT DISTINCT education_lvl from proj_stg;
